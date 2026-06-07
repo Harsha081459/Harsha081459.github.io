@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harsha Vardhan Doppalapudi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #111111;
+    --surface2: #1a1a1a;
+    --border: #222222;
+    --accent: #7fff6e;
+    --accent2: #6ebaff;
+    --accent3: #ff6e9c;
+    --text: #f0f0f0;
+    --muted: #666666;
+    --muted2: #444444;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    width: 32px; height: 32px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.08s ease;
+    opacity: 0.4;
+    mix-blend-mode: difference;
+  }
+
+  /* Grid noise texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(127,255,110,0.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(127,255,110,0.015) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  nav.scrolled {
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-color: var(--border);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+  }
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 3rem 5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(3.5rem, 9vw, 8rem);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.4s forwards;
+  }
+
+  .hero-name span {
+    display: block;
+    color: var(--muted2);
+    -webkit-text-stroke: 1px var(--muted2);
+  }
+  .hero-name .highlight { color: var(--text); -webkit-text-stroke: 0; }
+
+  .hero-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.6s forwards;
+  }
+
+  .hero-desc {
+    max-width: 420px;
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .hero-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .hero-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    padding: 0.6rem 1.2rem;
+    transition: all 0.2s;
+  }
+  .hero-links a:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(127,255,110,0.05);
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1s forwards;
+  }
+  .scroll-indicator span {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    animation: scrollPulse 2s ease infinite;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 7rem 3rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--accent);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    max-width: 80px;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .about-title em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .about-right { padding-top: 0.5rem; }
+
+  .about-text {
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .stat {
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+  }
+
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: var(--border);
+    border: 1.5px solid var(--border);
+  }
+
+  .project-card {
+    background: var(--surface);
+    padding: 2.5rem;
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 0;
+    background: var(--accent);
+    transition: height 0.4s ease;
+  }
+
+  .project-card:nth-child(2)::before { background: var(--accent2); }
+  .project-card:nth-child(3)::before { background: var(--accent3); }
+
+  .project-card:hover { background: var(--surface2); }
+  .project-card:hover::before { height: 100%; }
+
+  .project-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted2);
+    letter-spacing: 0.15em;
+    margin-bottom: 2rem;
+  }
+
+  .project-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+
+  .project-desc {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-metric {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    padding: 0.4rem 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .project-card:nth-child(2) .project-metric { color: var(--accent2); }
+  .project-card:nth-child(3) .project-metric { color: var(--accent3); }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 0.25rem 0.6rem;
+    letter-spacing: 0.05em;
+  }
+
+  .project-links {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .project-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 0.5rem 1rem;
+    transition: all 0.2s;
+  }
+
+  .project-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .project-card:nth-child(2) .project-link:hover {
+    border-color: var(--accent2);
+    color: var(--accent2);
+  }
+
+  .project-card:nth-child(3) .project-link:hover {
+    border-color: var(--accent3);
+    color: var(--accent3);
+  }
+
+  /* RESEARCH */
+  .research-card {
+    border: 1px solid var(--border);
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    background: var(--surface);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .research-card::after {
+    content: 'NLP';
+    position: absolute;
+    right: -1rem;
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    font-family: 'Syne', sans-serif;
+    font-size: 5rem;
+    font-weight: 800;
+    color: rgba(127,255,110,0.04);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .research-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .research-org {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .research-role {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .research-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .research-bullets li {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.7;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+
+  .research-bullets li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.8rem;
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5px;
+    background: var(--border);
+    border: 1.5px solid var(--border);
+  }
+
+  .skill-group {
+    background: var(--surface);
+    padding: 2rem 1.5rem;
+  }
+
+  .skill-group-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .skill-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .skill-list li {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+  }
+
+  /* ACHIEVEMENTS */
+  .achievements-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5px;
+    background: var(--border);
+    border: 1.5px solid var(--border);
+  }
+
+  .achievement-item {
+    background: var(--surface);
+    padding: 1.75rem 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    transition: background 0.2s;
+  }
+
+  .achievement-item:hover { background: var(--surface2); }
+
+  .achievement-icon {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    min-width: 60px;
+    text-align: center;
+  }
+
+  .achievement-text {
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  .achievement-detail {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    text-align: right;
+    min-width: 120px;
+  }
+
+  /* CONTACT */
+  .contact-inner {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .contact-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-title span { color: var(--accent); }
+
+  .contact-sub {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 3rem;
+    line-height: 1.7;
+  }
+
+  .contact-email {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--text);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    padding: 1rem 2.5rem;
+    display: inline-block;
+    letter-spacing: 0.05em;
+    transition: all 0.3s;
+    margin-bottom: 2rem;
+  }
+
+  .contact-email:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(127,255,110,0.05);
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 2rem 3rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-left {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  .footer-right {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 0 1.5rem 4rem; }
+    section { padding: 5rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: repeat(2, 1fr); }
+    .research-card { grid-template-columns: 1fr; gap: 2rem; }
+    .achievement-item { flex-direction: column; gap: 0.75rem; align-items: flex-start; }
+    .achievement-detail { text-align: left; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav id="navbar">
+  <div class="nav-logo">HVD</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">B.Tech DS&AI · IIIT Bangalore · 2024–2028</div>
+  <h1 class="hero-name">
+    <span class="highlight">Harsha</span>
+    <span>Vardhan</span>
+    <span>Doppalapudi</span>
+  </h1>
+  <div class="hero-bottom">
+    <p class="hero-desc">
+      I build ML systems end-to-end — from pretraining custom Transformers and shipping multi-model CV pipelines to deploying production-ready APIs. Currently researching cross-cultural bias in LLMs at IIIT Bangalore's NLP Lab.
+    </p>
+    <div class="hero-links">
+      <a href="https://github.com/Harsha081459" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/harsha-vardhan-doppalapudi-227b64326/" target="_blank">LinkedIn</a>
+      <a href="https://www.kaggle.com/harshavardhandoppalapudi" target="_blank">Kaggle</a>
+      <a href="mailto:harsha.vardhan@iiitb.ac.in">Email</a>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">01 · About</div>
+  <div class="about-grid">
+    <div>
+      <h2 class="about-title">
+        I build things<br>
+        that <em>actually</em><br>
+        work.
+      </h2>
+    </div>
+    <div class="about-right reveal">
+      <p class="about-text">
+        Second-year Data Science & AI undergrad at IIIT Bangalore. I care about the full stack — not just training models, but understanding architectures deeply enough to build them from scratch, and deploying them well enough that they run in production.
+      </p>
+      <p class="about-text">
+        Right now I'm doing an NLP research internship under Prof. Tulika Saha, studying how Western bias shows up in LLMs across 11 Indian regional cultures. On the side, I compete on Kaggle and build projects that solve real problems.
+      </p>
+      <div class="about-stats">
+        <div class="stat">
+          <div class="stat-num">110M</div>
+          <div class="stat-label">Params — custom BERT built from scratch</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">99.3%</div>
+          <div class="stat-label">mAP50 — helmet detection model</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">43.6%</div>
+          <div class="stat-label">MAE reduction — CLV engine</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">1,815</div>
+          <div class="stat-label">Cultural rules-of-thumb extracted</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">02 · Projects</div>
+  <div class="projects-grid reveal">
+
+    <div class="project-card">
+      <div class="project-num">001</div>
+      <h3 class="project-title">CLV Intelligence Engine</h3>
+      <p class="project-desc">Stacked LightGBM & BG/NBD predictive engine with causal T-Learner uplift optimizer and a full MLOps dashboard for marketing budget allocation.</p>
+      <div class="project-metric">↓ 43.6% MAE · 775K+ transactions · INR 50L budget</div>
+      <div class="project-tags">
+        <span class="tag">Python</span>
+        <span class="tag">LightGBM</span>
+        <span class="tag">Optuna</span>
+        <span class="tag">SHAP</span>
+        <span class="tag">Streamlit</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/Harsha081459/clv-intelligence-engine" target="_blank" class="project-link">GitHub</a>
+        <a href="https://clv-intelligence-engine-d7mfl8tlmmw4nfdw52nquk.streamlit.app/" target="_blank" class="project-link">Live</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">002</div>
+      <h3 class="project-title">Question Answering System</h3>
+      <p class="project-desc">Custom 12-layer, 768-dim Transformer encoder (~110M params) pretrained from scratch via MLM on Wikipedia, fine-tuned on SQuAD v2 with a hybrid extractive + generative decoder.</p>
+      <div class="project-metric">58.2 F1 on SQuAD v2 · no pretrained weights used</div>
+      <div class="project-tags">
+        <span class="tag">PyTorch</span>
+        <span class="tag">Hugging Face</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">Docker</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/Harsha081459/Question-Answer-System-with-a-Custom-Transformer-Encoder-and-Generative-Decoder" target="_blank" class="project-link">GitHub</a>
+        <a href="https://huggingface.co/spaces/hv-123/QA-Engine" target="_blank" class="project-link">Live</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">003</div>
+      <h3 class="project-title">Traffic Violation Detection</h3>
+      <p class="project-desc">4-model YOLO pipeline detecting helmet violations and triple riding on two-wheelers, with EasyOCR license plate extraction and conditional inference optimization.</p>
+      <div class="project-metric">99.3% mAP50 helmet · 96.9% mAP50 plate detection</div>
+      <div class="project-tags">
+        <span class="tag">YOLOv11</span>
+        <span class="tag">EasyOCR</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">Docker</span>
+        <span class="tag">OpenCV</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/Harsha081459/Traffic-Rule-Violation-Detection-for-Two-Wheelers" target="_blank" class="project-link">GitHub</a>
+        <a href="https://huggingface.co/spaces/hv-123/2-Wheeler_Traffic-violation-ai" target="_blank" class="project-link">Live</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="section-label">03 · Research</div>
+  <div class="research-card reveal">
+    <div>
+      <div class="research-period">June 2026 — Present</div>
+      <div class="research-org">NLP Research Lab<br>IIIT Bangalore</div>
+      <div class="research-role" style="margin-top:0.5rem">Under Prof. Tulika Saha</div>
+    </div>
+    <ul class="research-bullets">
+      <li>Designing an empirical study on Western bias in LLMs across 11 Indian regional cultures, extending a prior ACL 2025 country-level benchmark to state-level analysis.</li>
+      <li>Built an automated Python pipeline (OpenAI API + structured prompting) to extract 1,815 culturally grounded rules-of-thumb from regional literature PDFs.</li>
+      <li>Constructing a bilingual QA benchmark (English + regional languages) spanning homogeneous and heterogeneous agent-interaction scenarios.</li>
+      <li>Evaluating GPT-4o and LLaMA-3 using an LLM-as-judge framework to surface systematic cultural reasoning gaps and guide Supervised Fine-Tuning.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">04 · Skills</div>
+  <div class="skills-grid reveal">
+    <div class="skill-group">
+      <div class="skill-group-label">Languages</div>
+      <ul class="skill-list">
+        <li>Python</li>
+        <li>C++</li>
+        <li>SQL</li>
+        <li>Git</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">ML Frameworks</div>
+      <ul class="skill-list">
+        <li>PyTorch</li>
+        <li>Scikit-learn</li>
+        <li>Hugging Face</li>
+        <li>LightGBM</li>
+        <li>XGBoost</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">ML / AI</div>
+      <ul class="skill-list">
+        <li>LLMs</li>
+        <li>NLP</li>
+        <li>Computer Vision</li>
+        <li>Object Detection</li>
+        <li>OCR</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">Libraries</div>
+      <ul class="skill-list">
+        <li>Optuna</li>
+        <li>SHAP</li>
+        <li>OpenCV</li>
+        <li>EasyOCR</li>
+        <li>NumPy · Pandas</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">MLOps & Deploy</div>
+      <ul class="skill-list">
+        <li>FastAPI</li>
+        <li>Docker</li>
+        <li>Streamlit</li>
+        <li>Hugging Face Spaces</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-label">05 · Achievements</div>
+  <div class="achievements-list reveal">
+    <div class="achievement-item">
+      <div class="achievement-icon">01</div>
+      <div class="achievement-text">Finalist — national policy-innovation datathon analyzing UDISE+ education datasets to recommend data-driven interventions for government school outcomes.</div>
+      <div class="achievement-detail">Policy Datathon<br>2025</div>
+    </div>
+    <div class="achievement-item">
+      <div class="achievement-icon">02</div>
+      <div class="achievement-text">Competing in Kaggle Playground Series S6E6 — Predicting Stellar Class — building domain-engineered ensemble models with 3-model stacking architecture.</div>
+      <div class="achievement-detail">Kaggle<br>2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner reveal">
+    <h2 class="contact-title">Let's<br><span>build</span><br>something.</h2>
+    <p class="contact-sub">Open to research collaborations, internship opportunities, and interesting ML problems.</p>
+    <a href="mailto:harsha.vardhan@iiitb.ac.in" class="contact-email">harsha.vardhan@iiitb.ac.in</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-left">© 2026 Harsha Vardhan Doppalapudi</div>
+  <div class="footer-right">IIIT Bangalore · DS&AI</div>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx - 4 + 'px';
+    cursor.style.top = my - 4 + 'px';
+  });
+
+  function animateRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx - 16 + 'px';
+    ring.style.top = ry - 16 + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'scale(2.5)';
+      ring.style.transform = 'scale(1.5)';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'scale(1)';
+      ring.style.transform = 'scale(1)';
+    });
+  });
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
