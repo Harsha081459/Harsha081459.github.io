@@ -478,17 +478,19 @@
 
       <!-- Project 3 -->
       <div class="project-card">
-        <h3 class="project-title">Traffic Violation API</h3>
-        <p class="project-desc">A computer vision pipeline using YOLOv11 that automatically catches people riding without helmets or triple-riding, and successfully extracts their license plates using OCR.</p>
-        <div class="project-metric">99.3% mAP50 helmet · 96.9% plate detection</div>
+        <h3 class="project-title">Traffic Sentinel AI</h3>
+        <p class="project-desc">A production-deployed two-wheeler traffic violation detection system. Built a 3-stage YOLOv11 cascade — full-frame motorcycle detection, crop-level helmet classification, and license plate localisation — trained on 17,670 curated images from COCO, VisDrone, and Roboflow on a remote RTX 4060 Ti GPU. All inference is accelerated via ONNX Runtime (1.8× CPU speedup), served through a FastAPI backend, and deployed publicly on Hugging Face Spaces.</p>
+        <div class="project-metric">mAP50: 0.936 plate · 0.829 helmet · 0.761 motorcycle · 1.8× ONNX speedup</div>
         <div class="tags">
           <span class="tag">YOLOv11</span>
+          <span class="tag">ONNX Runtime</span>
+          <span class="tag">FastAPI</span>
           <span class="tag">Computer Vision</span>
-          <span class="tag">EasyOCR</span>
+          <span class="tag">Docker</span>
         </div>
         <div class="project-links">
           <a href="https://github.com/Harsha081459/Traffic-Rule-Violation-Detection-for-Two-Wheelers" target="_blank">GitHub</a>
-          <a href="https://huggingface.co/spaces/hv-123/2-Wheeler_Traffic-violation-ai" target="_blank">Live Demo →</a>
+          <a href="https://hv-123-traffic-sentinel-ai.hf.space" target="_blank">Live Demo →</a>
         </div>
       </div>
 
