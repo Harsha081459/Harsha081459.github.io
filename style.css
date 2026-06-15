@@ -620,40 +620,74 @@ h3 { font-size: 1.5rem; }
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
 }
 
-/* --- Mobile Responsiveness --- */
+/* --- Mobile Responsiveness (Standard View) --- */
+.mobile-banner {
+    display: none;
+}
+
 @media (max-width: 768px) {
+    .mobile-banner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.8rem;
+        background: rgba(255, 71, 87, 0.1);
+        border: 1px solid rgba(255, 71, 87, 0.3);
+        color: #ff4757;
+        padding: 1rem;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 0.85rem;
+        text-align: center;
+        margin: 1rem;
+        border-radius: 8px;
+    }
+
+    #dom-network-canvas {
+        display: none !important;
+    }
+    
     .portfolio-hero-title {
-        font-size: min(22vw, 24vh); /* Slightly larger vw for mobile */
-        width: 100%;
-        line-height: 1;
+        display: none !important;
     }
+    
     .story-timeline {
-        padding: 60px 1rem 100px 1rem;
+        padding: 20px 1rem 100px 1rem;
     }
+    
     .network-box {
-        padding: 3rem 2rem;
+        padding: 2rem 1.5rem;
         width: 100%;
-        margin-bottom: 8rem;
+        margin-bottom: 3rem;
+        background: rgba(20, 20, 20, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     }
+    
     .impact-flashcards {
         flex-direction: column;
-        gap: 2rem;
+        gap: 1.5rem;
     }
+    
     .flip-card {
         width: 100%;
+        height: 120px;
     }
+    
     .modal-content {
         padding: 2rem;
         width: 95%;
     }
+    
     .scroll-nav {
-        display: none; /* Hide side nav on small phones */
+        display: none;
     }
+    
     .layer-heading {
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
+    
     .name-title {
-        font-size: 2rem !important;
+        font-size: 1.8rem !important;
     }
 }
 .scroll-dash-container:hover .scroll-dash:not(.active) {
