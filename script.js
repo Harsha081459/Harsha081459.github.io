@@ -237,33 +237,33 @@ const projectData = {
         layer: 'Hidden Layer 2_',
         title: 'CLV Intelligence Engine',
         tech: ['LightGBM', 'Optuna', 'Streamlit'],
-        body: '<p>Engineered a stacked machine learning ensemble combining LightGBM with statistical BG/NBD probabilistic models, cutting <strong>Mean Absolute Error by 43.6%</strong> on 775K+ transactions.</p><p>Built a causal-inference T-Learner uplift model identifying 424 persuadable customers, enabling ROI-maximizing allocation of an <strong>INR 50L</strong> quarterly retention budget.</p><p>Served forecasts via a production Streamlit MLOps dashboard featuring 85.6%-coverage conformal prediction intervals and automated PSI drift monitoring.</p>',
+        body: '<p>Built a stacked LightGBM, XGBoost, and BG/NBD ensemble on 775K+ retail transactions, cutting CLV prediction MAE by <strong>43.6%</strong> through Optuna hyperparameter search and uncovering <strong>424</strong> high-value persuadable customers via uplift modeling.</p><p>Shipped a production Streamlit dashboard featuring <strong>85.6%</strong>-coverage conformal prediction intervals, automated PSI-based drift alerts, and SHAP explainability, directly informing stakeholder retention strategies.</p>',
         github: 'https://github.com/Harsha081459/clv-intelligence-engine',
         demo: 'https://clv-intelligence-engine-d7mfl8tlmmw4nfdw52nquk.streamlit.app/'
     },
     'transformer': {
         layer: 'Hidden Layer 2_',
         title: 'Transformer QA System',
-        tech: ['PyTorch', 'Hugging Face', 'FastAPI'],
-        body: '<p>Architected and trained a 12-layer, 768-dim custom Transformer encoder (~110M params) completely from scratch via GPU-accelerated Masked Language Modeling on Wikipedia.</p><p>Fine-tuned on 130K+ SQuAD v2 QA pairs, achieving <strong>58.2 F1 (Extractive)</strong> and <strong>39.9 F1 (Generative)</strong>, outperforming from-scratch DistilBERT and T5-small baselines trained under identical conditions.</p><p>Deployed an end-to-end inference pipeline as a containerized REST API, serving FP16-quantized models optimized for CPU inference.</p>',
+        tech: ['PyTorch', 'FastAPI', 'Docker'],
+        body: '<p>Pre-trained a 110M-parameter Transformer encoder from scratch on Wikipedia and fine-tuned on 130K+ SQuAD v2 pairs, surpassing DistilBERT and T5-Small baselines with <strong>58.2 F1 (Extractive)</strong> and <strong>39.9 F1 (Generative)</strong>.</p><p>Slashed inference latency by <strong>50%</strong> through FP16 quantization and containerized the model as a Docker-based FastAPI REST API on Hugging Face Spaces, serving <strong>100+</strong> daily queries on free-tier CPU.</p>',
         github: 'https://github.com/Harsha081459/Question-Answer-System-with-a-Custom-Transformer-Encoder-and-Generative-Decoder',
         demo: 'https://huggingface.co/spaces/hv-123/QA-Engine'
     },
     'cv': {
         layer: 'Hidden Layer 3_',
-        title: 'Traffic Violation CV',
+        title: 'Traffic Sentinel AI',
         tech: ['YOLOv11', 'ONNX Runtime', 'FastAPI'],
-        body: '<p>Built an end-to-end two-wheeler violation detection system—detecting no-helmet riders, overloaded bikes, and reading license plates—using a 3-stage YOLOv11 cascade.</p><p>Trained 3 specialized models on 17,670 curated images on a remote RTX 4060 Ti GPU, achieving mAP50 of <strong>0.936 (plate)</strong>, <strong>0.829 (helmet)</strong>, and 0.761 (motorcycle).</p><p>Accelerated CPU inference 1.8x via ONNX Runtime and deployed full-stack publicly on Hugging Face Spaces.</p>',
+        body: '<p>Engineered a 3-stage YOLOv11 cascade pipeline on 17,670 annotated images for real-time detection of helmetless riders, overloaded motorcycles, and license plates, achieving mAP50 scores of <strong>0.936</strong>, <strong>0.829</strong>, and <strong>0.761</strong>.</p><p>Boosted inference throughput by <strong>1.8&times;</strong> via ONNX Runtime conversion and deployed a production-grade FastAPI service with end-to-end CI/CD (Docker + GitHub Actions) on Hugging Face Spaces.</p>',
         github: 'https://github.com/Harsha081459/Traffic-Rule-Violation-Detection-for-Two-Wheelers',
         demo: 'https://hv-123-traffic-sentinel-ai.hf.space'
     },
-    'drone': {
+    'synthogen': {
         layer: 'Hidden Layer 3_',
-        title: 'Multimodal RL Drone',
-        tech: ['PPO', 'Vision Transformers'],
-        body: '<p>An advanced Reinforcement Learning simulation using Proximal Policy Optimization (PPO) to train an autonomous quadcopter agent.</p><p>The agent leverages Vision Transformers for spatial awareness, successfully learning to navigate complex environments. The final trained policy achieved a <strong>100% success rate</strong> during zero-shot generalization testing on unseen maps.</p>',
-        github: 'https://github.com/Harsha081459',
-        demo: '#'
+        title: 'SynthoGen AI: Privacy-Preserving EHR',
+        tech: ['PyTorch', 'Opacus', 'Streamlit'],
+        body: '<p>Evaluated 4 generative architectures (TabSyn, TabDDPM, CTGAN, TVAE) across 12 model-dataset configurations on 258K+ patient records, delivering <strong>94.6%</strong> downstream ML utility (TSTR accuracy) with <strong>zero</strong> privacy breaches.</p><p>Integrated DP-SGD differential privacy (Opacus) with formal auditing (DCR, K-Anonymity, Re-ID Risk) and shipped an interactive Streamlit dashboard; published synthetic datasets on IEEE DataPort (DOI: 10.21227/64c7-vj34).</p>',
+        github: 'https://github.com/Harsha081459/Synthetic-Data-Generation-for-Social-Good',
+        demo: 'https://synthetic-data-generation-for-social-good.streamlit.app'
     }
 };
 
