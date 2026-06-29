@@ -233,13 +233,13 @@ window.addEventListener('resize', () => {
 
 // --- 3. Interactive Project Modals ---
 const projectData = {
-    'clv': {
+    'dbms': {
         layer: 'Hidden Layer 2_',
-        title: 'CLV Intelligence Engine',
-        tech: ['LightGBM', 'Optuna', 'Streamlit'],
-        body: '<p>Built a stacked LightGBM, XGBoost, and BG/NBD ensemble on 775K+ retail transactions, cutting CLV prediction MAE by <strong>43.6%</strong> through Optuna hyperparameter search and uncovering <strong>424</strong> high-value persuadable customers via uplift modeling.</p><p>Shipped a production Streamlit dashboard featuring <strong>85.6%</strong>-coverage conformal prediction intervals, automated PSI-based drift alerts, and SHAP explainability, directly informing stakeholder retention strategies.</p>',
-        github: 'https://github.com/Harsha081459/clv-intelligence-engine',
-        demo: 'https://clv-intelligence-engine-d7mfl8tlmmw4nfdw52nquk.streamlit.app/'
+        title: 'Global Logistics Tracking Platform',
+        tech: ['FastAPI', 'MySQL', 'Docker'],
+        body: '<p>Architected a full-stack logistics engine using FastAPI and MySQL 8.0, implementing a dynamic pricing algorithm and Role-Based Access Control (RBAC) via JWT authentication.</p><p>Containerized the backend and database architecture using Docker Compose, establishing robust relational schemas to map 1-to-many tracking histories and accelerating deployment workflows.</p>',
+        github: 'https://github.com/Harsha081459/DBMS_Project',
+        demo: '#'
     },
     'transformer': {
         layer: 'Hidden Layer 2_',
