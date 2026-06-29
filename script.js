@@ -235,9 +235,9 @@ window.addEventListener('resize', () => {
 const projectData = {
     'dbms': {
         layer: 'Hidden Layer 2_',
-        title: 'Global Logistics Tracking Platform',
-        tech: ['FastAPI', 'MySQL', 'Docker'],
-        body: '<p>Architected a full-stack logistics engine using FastAPI and MySQL 8.0, implementing a dynamic pricing algorithm and Role-Based Access Control (RBAC) via JWT authentication.</p><p>Containerized the backend and database architecture using Docker Compose, establishing robust relational schemas to map 1-to-many tracking histories and accelerating deployment workflows.</p>',
+        title: 'Air-Cargo Database Engine',
+        tech: ['Python', 'MySQL', 'CLI'],
+        body: '<p>Engineered an interactive terminal-based logistics application in Python, utilizing the mysql-connector to execute highly relational SQL queries (JOINs, Aggregations) and map complex cargo supply chains.</p><p>Designed a strictly normalized 5-table schema in MySQL with ON DELETE CASCADE foreign key constraints, implementing manual transaction management and Role-Based Access Control to ensure data integrity.</p>',
         github: 'https://github.com/Harsha081459/DBMS_Project',
         demo: '#'
     },
