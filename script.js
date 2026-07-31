@@ -236,34 +236,34 @@ const projectData = {
     'dbms': {
         layer: 'Hidden Layer 2_',
         title: 'Air-Cargo Database Engine',
-        tech: ['Python', 'MySQL', 'CLI'],
-        body: '<p>Engineered an interactive terminal-based logistics application in Python, utilizing the mysql-connector to execute highly relational SQL queries (JOINs, Aggregations) and map complex cargo supply chains.</p><p>Designed a strictly normalized 5-table schema in MySQL with ON DELETE CASCADE foreign key constraints, implementing manual transaction management and Role-Based Access Control to ensure data integrity.</p>',
+        tech: ['Python', 'MySQL 8.0', 'REST API'],
+        body: '<p>Designed a normalized 5-table relational schema in MySQL 8.0 and built a REST API backend in Python to track complex supply chain networks for an air-travel cargo logistics system.</p><p>Ensured zero data corruption during concurrent logistics updates by implementing strict ACID transactions with rollback safety, and secured all endpoints via JWT-based Role-Based Access Control (RBAC).</p>',
         github: 'https://github.com/Harsha081459/DBMS_Project',
         demo: '#'
     },
-    'transformer': {
+    'event': {
         layer: 'Hidden Layer 2_',
-        title: 'Transformer QA System',
-        tech: ['PyTorch', 'FastAPI', 'Docker'],
-        body: '<p>Pre-trained a 110M-parameter Transformer encoder from scratch on Wikipedia and fine-tuned on 130K+ SQuAD v2 pairs, surpassing DistilBERT and T5-Small baselines with <strong>58.2 F1 (Extractive)</strong> and <strong>39.9 F1 (Generative)</strong>.</p><p>Slashed inference latency by <strong>50%</strong> through FP16 quantization and containerized the model as a Docker-based FastAPI REST API on Hugging Face Spaces, serving <strong>100+</strong> daily queries on free-tier CPU.</p>',
-        github: 'https://github.com/Harsha081459/Question-Answer-System-with-a-Custom-Transformer-Encoder-and-Generative-Decoder',
-        demo: 'https://huggingface.co/spaces/hv-123/QA-Engine'
+        title: 'Event Ticketing Platform',
+        tech: ['C', 'Sockets', '2PL', 'WAL'],
+        body: '<p>Engineered a multi-threaded TCP server in C utilizing bounded thread pools and I/O Multiplexing (select) to handle high-throughput concurrent client bookings with connection-limiting semaphores.</p><p>Built a custom page-based storage engine featuring a Write-Ahead Log (WAL), Two-Phase Locking (2PL), and an LRU Buffer Pool to ensure strict ACID transactions and data durability.</p>',
+        github: 'https://github.com/Harsha081459/event-ticketing-platform',
+        demo: '#'
     },
     'cv': {
         layer: 'Hidden Layer 3_',
         title: 'Traffic Sentinel AI',
-        tech: ['YOLOv11', 'ONNX Runtime', 'FastAPI'],
-        body: '<p>Engineered a 3-stage YOLOv11 cascade pipeline on 17,670 annotated images for real-time detection of helmetless riders, overloaded motorcycles, and license plates, achieving mAP50 scores of <strong>0.936</strong>, <strong>0.829</strong>, and <strong>0.761</strong>.</p><p>Boosted inference throughput by <strong>1.8&times;</strong> via ONNX Runtime conversion and deployed a production-grade FastAPI service with end-to-end CI/CD (Docker + GitHub Actions) on Hugging Face Spaces.</p>',
+        tech: ['Python', 'YOLOv11', 'OpenCV', 'ONNX'],
+        body: '<p>Attained high-precision mAP50 scores of 0.936 and 0.829 in real-time object detection by training a scalable 3-stage cascade pipeline using YOLOv11 on 17,670 annotated images.</p><p>Increased inference throughput by 1.8&times; by converting trained PyTorch models to ONNX Runtime, enabling efficient batch processing and low-latency predictions on unseen video streams.</p>',
         github: 'https://github.com/Harsha081459/Traffic-Rule-Violation-Detection-for-Two-Wheelers',
         demo: 'https://hv-123-traffic-sentinel-ai.hf.space'
     },
-    'synthogen': {
+    'customer': {
         layer: 'Hidden Layer 3_',
-        title: 'SynthoGen AI: Privacy-Preserving EHR',
-        tech: ['PyTorch', 'Opacus', 'Streamlit'],
-        body: '<p>Evaluated 4 generative architectures (TabSyn, TabDDPM, CTGAN, TVAE) across 12 model-dataset configurations on 258K+ patient records, delivering <strong>94.6%</strong> downstream ML utility (TSTR accuracy) with <strong>zero</strong> privacy breaches.</p><p>Integrated DP-SGD differential privacy (Opacus) with formal auditing (DCR, K-Anonymity, Re-ID Risk) and shipped an interactive Streamlit dashboard; published synthetic datasets on IEEE DataPort (DOI: 10.21227/64c7-vj34).</p>',
-        github: 'https://github.com/Harsha081459/Synthetic-Data-Generation-for-Social-Good',
-        demo: 'https://synthetic-data-generation-for-social-good.streamlit.app'
+        title: 'Customer Review Prediction',
+        tech: ['Python', 'scikit-learn', 'SQL', 'Pandas'],
+        body: '<p>Built an end-to-end ML pipeline to predict customer review sentiment on 100K+ e-commerce orders by joining 6 relational tables, engineering 22 leakage-safe features, and validating 5 statistical hypotheses using Welch\'s t-tests.</p><p>Achieved 0.829 F1 and 0.691 ROC-AUC with a tuned Random Forest classifier, outperforming logistic regression baselines, and derived 5 actionable business insights on seller quality and logistics that directly inform product decisions.</p>',
+        github: 'https://github.com/Harsha081459/customer_review_prediction',
+        demo: '#'
     }
 };
 
